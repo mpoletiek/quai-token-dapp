@@ -46,7 +46,7 @@ Before you begin, ensure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/quai-token-dapp.git
+git clone https://github.com/mpoletiek/quai-token-dapp.git
 cd quai-token-dapp
 ```
 
@@ -64,8 +64,8 @@ Create a `.env.local` file in the project root:
 
 ```bash
 # Quai Network Configuration
-NEXT_PUBLIC_RPC_URL=https://rpc.cyprus1.colosseum.quaiscan.io
-NEXT_PUBLIC_EXPLORER_URL=https://cyprus1.colosseum.quaiscan.io
+NEXT_PUBLIC_RPC_URL=https://orchard.rpc.quai.network
+NEXT_PUBLIC_EXPLORER_URL=https://orchard.quaiscan.io
 CHAIN_ID=0x00
 
 # Contract Configuration (set after deployment)
@@ -208,8 +208,8 @@ npx hardhat run scripts/deployToken.js --network cyprus1
 ## 🌐 Network Configuration
 
 ### Quai Network (Cyprus-1)
-- **RPC URL**: `https://rpc.cyprus1.colosseum.quaiscan.io`
-- **Explorer**: `https://cyprus1.colosseum.quaiscan.io`
+- **RPC URL**: `https://orchard.rpc.quai.network`
+- **Explorer**: `https://orchard.quaiscan.io`
 - **Chain ID**: `0x00`
 
 ### Adding Custom Networks
@@ -242,7 +242,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🔗 Links
 
-- [Quai Network](https://quai.network/)
+- [Quai Network](https://qu.ai/)
 - [Pelagus Wallet](https://pelaguswallet.io/)
 - [OpenZeppelin](https://openzeppelin.com/)
 - [Next.js Documentation](https://nextjs.org/docs)
@@ -258,7 +258,7 @@ If you encounter any issues:
 
 ## 🙏 Acknowledgments
 
-- [Quai Network](https://quai.network/) for the blockchain infrastructure
+- [Quai Network](https://qua.ai/) for the blockchain infrastructure
 - [OpenZeppelin](https://openzeppelin.com/) for secure smart contract libraries
 - [Next.js](https://nextjs.org/) for the React framework
 - [Tailwind CSS](https://tailwindcss.com/) for styling utilities
