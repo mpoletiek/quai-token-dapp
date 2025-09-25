@@ -7,8 +7,7 @@ import {
   TokenInfoComponent, 
   BalanceDisplay, 
   TransferForm, 
-  OwnerPanel,
-  ContractStatus 
+  OwnerPanel 
 } from "@/components/token";
 
 export default function Home() {
@@ -53,11 +52,6 @@ export default function Home() {
               </span>
             )}
           </p>
-        </div>
-
-        {/* Contract Status - Show prominently if there are issues */}
-        <div className="mb-8">
-          <ContractStatus />
         </div>
 
         {/* Grid Layout */}
