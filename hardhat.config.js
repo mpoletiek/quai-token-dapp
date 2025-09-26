@@ -31,6 +31,7 @@ export default {
           enabled: true,
           runs: 1000,
         },
+        viaIR: true,
         metadata: {
           bytecodeHash: 'ipfs',
           useLiteralContent: true, // Include the source code in the metadata
@@ -45,6 +46,7 @@ export default {
           enabled: true,
           runs: 1000,
         },
+        viaIR: true,
         metadata: {
           bytecodeHash: 'ipfs',
           useLiteralContent: true, // Include the source code in the metadata

@@ -22,23 +22,10 @@ export interface TokenBalance {
   formatted: string;
 }
 
-// Get contract instance
-export const getTokenContract = (provider: any, signer?: any) => {
-  const contractAddress = DEPLOYED_CONTRACT;
-  if (!contractAddress) {
-    throw new Error('Contract address not found');
-  }
-  
-  if (signer) {
-    return new quais.Contract(contractAddress, TOKEN_ABI, signer);
-  }
-  return new quais.Contract(contractAddress, TOKEN_ABI, provider);
-};
-
 // Get token information
 export const getTokenInfo = async (provider: any): Promise<TokenInfo> => {
   try {
-    const contract = getTokenContract(provider);
+    const contract = new quais.Contract(DEPLOYED_CONTRACT, TOKEN_ABI, provider);
     
     const [name, symbol, decimals, totalSupply, maxSupply, totalMinted] = await Promise.all([
       contract.name(),
@@ -66,7 +53,7 @@ export const getTokenInfo = async (provider: any): Promise<TokenInfo> => {
 // Get user token balance
 export const getTokenBalance = async (provider: any, address: string): Promise<TokenBalance> => {
   try {
-    const contract = getTokenContract(provider);
+    const contract = new quais.Contract(DEPLOYED_CONTRACT, TOKEN_ABI, provider);
     const balance = await contract.balanceOf(address);
     const decimals = await contract.decimals();
     
@@ -87,7 +74,7 @@ export const transferTokens = async (
   amount: string
 ): Promise<any> => {
   try {
-    const contract = getTokenContract(signer, signer);
+    const contract = new quais.Contract(DEPLOYED_CONTRACT, TOKEN_ABI, signer);
     const decimals = await contract.decimals();
     const amountWei = quais.parseUnits(amount, decimals);
     
@@ -106,7 +93,7 @@ export const mintTokens = async (
   amount: string
 ): Promise<any> => {
   try {
-    const contract = getTokenContract(signer, signer);
+    const contract = new quais.Contract(DEPLOYED_CONTRACT, TOKEN_ABI, signer);
     const decimals = await contract.decimals();
     const amountWei = quais.parseUnits(amount, decimals);
     
@@ -124,7 +111,7 @@ export const burnTokens = async (
   amount: string
 ): Promise<any> => {
   try {
-    const contract = getTokenContract(signer, signer);
+    const contract = new quais.Contract(DEPLOYED_CONTRACT, TOKEN_ABI, signer);
     const decimals = await contract.decimals();
     const amountWei = quais.parseUnits(amount, decimals);
     
@@ -142,7 +129,7 @@ export const updateMaxSupply = async (
   newMaxSupply: string
 ): Promise<any> => {
   try {
-    const contract = getTokenContract(signer, signer);
+    const contract = new quais.Contract(DEPLOYED_CONTRACT, TOKEN_ABI, signer);
     const newMaxSupplyWei = quais.parseUnits(newMaxSupply, 18); // Assuming 18 decimals for max supply
     
     const tx = await contract.updateMaxSupply(newMaxSupplyWei);
@@ -156,7 +143,7 @@ export const updateMaxSupply = async (
 // Check if address is contract owner
 export const isContractOwner = async (provider: any, address: string): Promise<boolean> => {
   try {
-    const contract = getTokenContract(provider);
+    const contract = new quais.Contract(DEPLOYED_CONTRACT, TOKEN_ABI, provider);
     const owner = await contract.owner();
     return owner.toLowerCase() === address.toLowerCase();
   } catch (error) {

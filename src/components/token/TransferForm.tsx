@@ -52,7 +52,7 @@ export const TransferForm = () => {
       setError(null);
       setSuccess(null);
 
-      const tx = await transferTokens(web3Provider, recipient, amount);
+      const tx = await transferTokens(await web3Provider.getSigner(), recipient, amount);
       
       setSuccess(`Transfer successful! Transaction hash: ${shortenAddress(tx.hash)}`);
       setRecipient('');

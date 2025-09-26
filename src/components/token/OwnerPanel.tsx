@@ -87,7 +87,7 @@ export const OwnerPanel = () => {
       setMintError(null);
       setMintSuccess(null);
 
-      const tx = await mintTokens(web3Provider, mintRecipient, mintAmount);
+      const tx = await mintTokens(await web3Provider.getSigner(), mintRecipient, mintAmount);
       
       setMintSuccess(`Mint successful! Transaction hash: ${shortenAddress(tx.hash)}`);
       setMintRecipient('');
@@ -118,7 +118,7 @@ export const OwnerPanel = () => {
       setBurnError(null);
       setBurnSuccess(null);
 
-      const tx = await burnTokens(web3Provider, burnAmount);
+      const tx = await burnTokens(await web3Provider.getSigner(), burnAmount);
       
       setBurnSuccess(`Burn successful! Transaction hash: ${shortenAddress(tx.hash)}`);
       setBurnAmount('');
@@ -148,7 +148,7 @@ export const OwnerPanel = () => {
       setMaxSupplyError(null);
       setMaxSupplySuccess(null);
 
-      const tx = await updateMaxSupply(web3Provider, newMaxSupply);
+      const tx = await updateMaxSupply(await web3Provider.getSigner(), newMaxSupply);
       
       setMaxSupplySuccess(`Max supply updated! Transaction hash: ${shortenAddress(tx.hash)}`);
       setNewMaxSupply('');
@@ -284,7 +284,7 @@ export const OwnerPanel = () => {
             <span className="w-8 h-8 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center mr-3">
               <span className="text-red-600 dark:text-red-400 text-sm">-</span>
             </span>
-            Burn Tokens
+            Burn Owned Tokens
           </h3>
           
           <form onSubmit={handleBurn} className="space-y-4">
