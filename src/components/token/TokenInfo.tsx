@@ -2,13 +2,14 @@
 
 import { useContext, useEffect, useState } from 'react';
 import { StateContext } from '@/app/store';
-import { getTokenInfo, TokenInfo, formatTokenAmount } from '@/utils/tokenUtils';
+import { getTokenInfo, TokenInfo, formatTokenAmount, isContractPaused } from '@/utils/tokenUtils';
 
 export const TokenInfoComponent = () => {
   const { rpcProvider } = useContext(StateContext);
   const [tokenInfo, setTokenInfo] = useState<TokenInfo | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     const fetchTokenInfo = async () => {
@@ -20,8 +21,12 @@ export const TokenInfoComponent = () => {
       try {
         setLoading(true);
         setError(null);
-        const info = await getTokenInfo(rpcProvider);
+        const [info, pauseStatus] = await Promise.all([
+          getTokenInfo(rpcProvider),
+          isContractPaused(rpcProvider)
+        ]);
         setTokenInfo(info);
+        setIsPaused(pauseStatus);
       } catch (err) {
         console.error('Failed to fetch token info:', err);
         setError('Failed to load token information');
@@ -77,9 +82,21 @@ export const TokenInfoComponent = () => {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-          Token Information
-        </h2>
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+            Token Information
+          </h2>
+          {/* Pause Status Indicator */}
+          <div className="mt-2">
+            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+              isPaused 
+                ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' 
+                : 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+            }`}>
+              {isPaused ? '⏸️ PAUSED' : '▶️ ACTIVE'}
+            </span>
+          </div>
+        </div>
         <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
           <span className="text-white font-bold text-xl">
             {tokenInfo.symbol.charAt(0)}

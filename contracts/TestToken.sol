@@ -3,10 +3,12 @@ pragma solidity ^0.8.17;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/Pausable.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
-contract TestToken is ERC20, ERC20Permit, Ownable {
+contract TestToken is ERC20, ERC20Permit, ERC20Pausable, Ownable {
     
     // Maximum supply cap (0 means no limit)
     uint256 public maxSupply;
@@ -32,7 +34,7 @@ contract TestToken is ERC20, ERC20Permit, Ownable {
      * @param to Address to mint tokens to
      * @param amount Amount of tokens to mint
      */
-    function mint(address to, uint256 amount) external onlyOwner {
+    function mint(address to, uint256 amount) external onlyOwner whenNotPaused {
         require(to != address(0), "Cannot mint to zero address");
         require(amount > 0, "Amount must be greater than zero");
         
@@ -50,7 +52,7 @@ contract TestToken is ERC20, ERC20Permit, Ownable {
      * @dev Burn tokens from caller's balance
      * @param amount Amount of tokens to burn
      */
-    function burn(uint256 amount) external onlyOwner {
+    function burn(uint256 amount) external onlyOwner whenNotPaused {
         require(amount > 0, "Amount must be greater than zero");
         require(balanceOf(msg.sender) >= amount, "Insufficient balance to burn");
         
@@ -66,6 +68,32 @@ contract TestToken is ERC20, ERC20Permit, Ownable {
         require(newMaxSupply == 0 || newMaxSupply >= totalSupply(), "New max supply must be >= current supply");
         
         maxSupply = newMaxSupply;        
+    }
+    
+    // ============ PAUSABLE FUNCTIONALITY ============
+    
+    /**
+     * @dev Override _update to integrate pausability with permit functionality
+     * This function is called by both ERC20Pausable and ERC20Permit
+     */
+    function _update(address from, address to, uint256 value) internal override(ERC20, ERC20Pausable) {
+        super._update(from, to, value);
+    }
+    
+    /**
+     * @dev Pause the contract (owner only)
+     * When paused, transfers, minting, burning, and permit functions are disabled
+     */
+    function pause() external onlyOwner {
+        _pause();
+    }
+    
+    /**
+     * @dev Unpause the contract (owner only)
+     * Restores normal functionality
+     */
+    function unpause() external onlyOwner {
+        _unpause();
     }
     
     // ============ PERMIT ENHANCEMENTS ============
@@ -107,7 +135,7 @@ contract TestToken is ERC20, ERC20Permit, Ownable {
         uint8 v,
         bytes32 r,
         bytes32 s
-    ) external {
+    ) external whenNotPaused {
         // First, use the permit to set the allowance
         permit(from, msg.sender, amount, deadline, v, r, s);
         
@@ -134,7 +162,7 @@ contract TestToken is ERC20, ERC20Permit, Ownable {
         uint8[] calldata v,
         bytes32[] calldata r,
         bytes32[] calldata s
-    ) external {
+    ) external whenNotPaused {
         require(
             owners.length == spenders.length &&
             spenders.length == amounts.length &&

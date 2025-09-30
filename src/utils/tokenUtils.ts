@@ -152,6 +152,41 @@ export const isContractOwner = async (provider: any, address: string): Promise<b
   }
 };
 
+// Check if contract is paused
+export const isContractPaused = async (provider: any): Promise<boolean> => {
+  try {
+    const contract = new quais.Contract(DEPLOYED_CONTRACT, TOKEN_ABI, provider);
+    return await contract.paused();
+  } catch (error) {
+    console.error('Error checking contract pause status:', error);
+    return false;
+  }
+};
+
+// Pause contract (owner only)
+export const pauseContract = async (signer: any): Promise<any> => {
+  try {
+    const contract = new quais.Contract(DEPLOYED_CONTRACT, TOKEN_ABI, signer);
+    const tx = await contract.pause();
+    return await tx.wait();
+  } catch (error) {
+    console.error('Error pausing contract:', error);
+    throw error;
+  }
+};
+
+// Unpause contract (owner only)
+export const unpauseContract = async (signer: any): Promise<any> => {
+  try {
+    const contract = new quais.Contract(DEPLOYED_CONTRACT, TOKEN_ABI, signer);
+    const tx = await contract.unpause();
+    return await tx.wait();
+  } catch (error) {
+    console.error('Error unpausing contract:', error);
+    throw error;
+  }
+};
+
 // Format token amount for display
 export const formatTokenAmount = (amount: string, decimals: number): string => {
   try {

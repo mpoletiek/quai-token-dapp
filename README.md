@@ -15,6 +15,7 @@ A comprehensive decentralized application (dApp) for interacting with ERC20 toke
 - **Balance Management**: Check and refresh token balances with real-time updates
 - **Token Transfers**: Send tokens to any address with validation and transaction feedback
 - **Owner Controls**: Mint new tokens, burn existing tokens, and manage supply limits (owner only)
+- **Contract Pausability**: Pause/unpause contract operations for emergency control (owner only)
 - **Wallet Integration**: Connect with Pelagus wallet for Quai Network
 
 ### 🆕 Advanced Features
@@ -38,7 +39,7 @@ A comprehensive decentralized application (dApp) for interacting with ERC20 toke
 - **Frontend**: Next.js 14, React 18, TypeScript
 - **Styling**: Tailwind CSS with custom components
 - **Blockchain**: Quai Network, Quais.js SDK
-- **Smart Contracts**: Solidity 0.8.17+, OpenZeppelin contracts (ERC20, ERC20Permit)
+- **Smart Contracts**: Solidity 0.8.17+, OpenZeppelin contracts (ERC20, ERC20Permit, ERC20Pausable)
 - **Wallet**: Pelagus wallet integration
 - **Build Tools**: Hardhat (with viaIR compilation), ESLint, PostCSS
 - **Standards**: EIP-2612 (Permit), EIP-712 (Typed Data Signing)
@@ -145,6 +146,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the dApp.
 - **Mint Tokens**: Create new tokens and send them to any address
 - **Burn Tokens**: Remove tokens from your balance
 - **Update Max Supply**: Modify the maximum token supply limit
+- **Contract Control**: Pause/unpause contract operations for emergency situations
 
 ### 🆕 Permit Operations (EIP-2612)
 
@@ -175,6 +177,42 @@ The dApp includes advanced Permit functionality for gasless approvals:
 - **Batch Operations**: Multiple permits in one transaction
 - **Mobile Friendly**: Better experience on mobile devices
 
+### 🛡️ Contract Pausability
+
+The dApp includes emergency pause functionality for contract owners:
+
+#### Pause Status Display
+- **Token Information Panel**: Shows current contract status (ACTIVE/PAUSED)
+- **Owner Panel**: Detailed pause status with control buttons
+- **Real-time Updates**: Status updates immediately after pause/unpause operations
+
+#### Pause/Unpause Operations
+1. **Access Owner Panel**: Only contract owners can see the Contract Control section
+2. **View Current Status**: Check if contract is currently paused or active
+3. **Pause Contract**: Click "⏸️ Pause Contract" to disable all operations
+4. **Unpause Contract**: Click "▶️ Unpause Contract" to restore functionality
+
+#### What Gets Paused
+When the contract is paused, the following operations are disabled:
+- ❌ Token transfers (`transfer`, `transferFrom`)
+- ❌ Token minting (`mint`)
+- ❌ Token burning (`burn`)
+- ❌ Gasless transfers (`permitTransfer`)
+- ❌ Batch permits (`batchPermit`)
+
+#### What Remains Available
+These functions continue to work even when paused:
+- ✅ View functions (`balanceOf`, `totalSupply`, etc.)
+- ✅ Permit signature verification (`permit`)
+- ✅ Utility functions (`getNonce`, `getDomainSeparator`)
+- ✅ Supply management (`updateMaxSupply`)
+
+#### Use Cases
+- **Emergency Situations**: Quickly halt all token operations if security issues are detected
+- **Maintenance**: Pause during contract upgrades or maintenance
+- **Compliance**: Meet regulatory requirements for token operations
+- **Security**: Prevent further damage during security incidents
+
 ## 🏗️ Project Structure
 
 ```
@@ -192,16 +230,16 @@ quai-token-dapp/
 │   │   └── additional.d.ts   # TypeScript declarations
 │   ├── components/           # React components
 │   │   ├── token/            # Token-related components
-│   │   │   ├── TokenInfo.tsx      # Token metadata display
+│   │   │   ├── TokenInfo.tsx      # Token metadata display (with pause status)
 │   │   │   ├── BalanceDisplay.tsx # User balance management
 │   │   │   ├── TransferForm.tsx   # Token transfer interface
-│   │   │   ├── OwnerPanel.tsx     # Owner-only functions
+│   │   │   ├── OwnerPanel.tsx     # Owner-only functions (with pause controls)
 │   │   │   ├── PermitPanel.tsx    # 🆕 Permit functionality
 │   │   │   └── index.ts           # Component exports
 │   │   └── wallet/           # Wallet components
 │   │       └── connectButton.tsx  # Enhanced wallet connection
 │   └── utils/                # Utility functions
-│       ├── tokenUtils.ts     # Token contract interactions
+│       ├── tokenUtils.ts     # Token contract interactions (with pause functions)
 │       ├── permitUtils.ts    # 🆕 Permit signature utilities
 │       ├── quaisUtils.ts     # Quai Network utilities
 │       ├── constants.ts      # Environment constants
@@ -260,12 +298,16 @@ The `TestToken.sol` contract includes:
 
 - **ERC20 Standard**: Full ERC20 token implementation
 - **ERC20Permit Extension**: EIP-2612 permit functionality
-- **Owner Controls**: Mint, burn, and supply management
+- **ERC20Pausable Extension**: Emergency pause functionality
+- **Owner Controls**: Mint, burn, supply management, and contract pausability
 - **Enhanced Functions**:
   - `getNonce()`: Get current nonce for an address
   - `getDomainSeparator()`: Get EIP-712 domain separator
   - `permitTransfer()`: Gasless transfer using permit
   - `batchPermit()`: Batch multiple permits in one transaction
+  - `pause()`: Pause all contract operations (owner only)
+  - `unpause()`: Resume contract operations (owner only)
+  - `paused()`: Check if contract is currently paused
 
 #### Compilation Notes
 
@@ -290,6 +332,9 @@ To add support for additional networks, update the configuration in:
 
 ### Latest Updates
 
+- **Contract Pausability**: Emergency pause/unpause functionality for contract owners
+- **Enhanced Owner Panel**: New contract control section with pause status indicators
+- **Real-time Status Display**: Live pause status in token information panel
 - **Permit Standard Support**: Full EIP-2612 implementation for gasless approvals
 - **Enhanced UI**: New PermitPanel with tabbed interface for better UX
 - **Advanced Contract Features**: Batch permits, gasless transfers, and nonce management
@@ -348,7 +393,7 @@ If you encounter any issues:
 ## 🙏 Acknowledgments
 
 - [Quai Network](https://qua.ai/) for the blockchain infrastructure
-- [OpenZeppelin](https://openzeppelin.com/) for secure smart contract libraries and ERC20Permit
+- [OpenZeppelin](https://openzeppelin.com/) for secure smart contract libraries, ERC20Permit, and ERC20Pausable
 - [Next.js](https://nextjs.org/) for the React framework
 - [Tailwind CSS](https://tailwindcss.com/) for styling utilities
 - [EIP-2612](https://eips.ethereum.org/EIPS/eip-2612) for the Permit standard specification
@@ -360,6 +405,7 @@ If you encounter any issues:
 - [EIP-2612 Permit Standard](https://eips.ethereum.org/EIPS/eip-2612)
 - [EIP-712 Typed Data Signing](https://eips.ethereum.org/EIPS/eip-712)
 - [OpenZeppelin ERC20Permit Documentation](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20Permit)
+- [OpenZeppelin ERC20Pausable Documentation](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20Pausable)
 - [Quai Network Documentation](https://docs.qu.ai/)
 - [Pelagus Wallet Documentation](https://docs.pelaguswallet.io/)
 
