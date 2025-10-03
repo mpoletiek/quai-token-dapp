@@ -2,7 +2,7 @@
 
 import { quais } from 'quais';
 import { DEPLOYED_CONTRACT } from './constants';
-import TokenJson from '../../artifacts/contracts/TestToken.sol/TestToken.json';
+import TokenJson from '../../artifacts/contracts/TestTokenV2.sol/TestTokenV2.json';
 
 // Contract ABI
 const TOKEN_ABI = TokenJson.abi;

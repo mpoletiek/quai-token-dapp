@@ -1,32 +1,40 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.17;
+pragma solidity ^0.8.22;
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Pausable.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Pausable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20PermitUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20PausableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
-contract TestToken is ERC20, ERC20Permit, ERC20Pausable, Ownable {
+contract TestToken is Initializable, ERC20Upgradeable, ERC20PermitUpgradeable, ERC20PausableUpgradeable, OwnableUpgradeable {
     
     // Maximum supply cap (0 means no limit)
     uint256 public maxSupply;
     // Mapping to track total minted amount
     uint256 public totalMinted;
     
-    constructor(
+    function initialize(
         string memory name,
         string memory symbol,
         uint256 initialSupply,
-        uint256 _maxSupply
-    ) ERC20(name, symbol) ERC20Permit(name) Ownable(msg.sender) {
+        uint256 _maxSupply,
+        address initialOwner
+    ) public initializer {
         require(initialSupply <= _maxSupply || _maxSupply == 0, "Initial supply exceeds max supply");
+        require(initialOwner != address(0), "Initial owner cannot be zero address");
+        
+        __ERC20_init(name, symbol);
+        __ERC20Permit_init(name);
+        __Ownable_init(initialOwner);
+        __Pausable_init();
         
         maxSupply = _maxSupply;
         totalMinted = initialSupply;
         
-        _mint(msg.sender, initialSupply);
+        _mint(initialOwner, initialSupply);
     }
     
     /**
@@ -76,7 +84,7 @@ contract TestToken is ERC20, ERC20Permit, ERC20Pausable, Ownable {
      * @dev Override _update to integrate pausability with permit functionality
      * This function is called by both ERC20Pausable and ERC20Permit
      */
-    function _update(address from, address to, uint256 value) internal override(ERC20, ERC20Pausable) {
+    function _update(address from, address to, uint256 value) internal override(ERC20Upgradeable, ERC20PausableUpgradeable) {
         super._update(from, to, value);
     }
     

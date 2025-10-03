@@ -1,12 +1,14 @@
-# TestToken dApp
+# TestToken dApp - Upgradeable ERC20 with V2 Features
 
-A comprehensive decentralized application (dApp) for interacting with ERC20 tokens on the Quai Network. This project demonstrates modern Web3 development practices with a full-featured token management interface, including advanced Permit standard (EIP-2612) support for gasless approvals.
+A comprehensive decentralized application (dApp) for interacting with upgradeable ERC20 tokens on the Quai Network. This project demonstrates modern Web3 development practices with a full-featured token management interface, including advanced Permit standard (EIP-2612) support, upgradeable smart contracts, and V2 compliance features.
 
 ![TestToken dApp](https://img.shields.io/badge/TestToken-dApp-blue)
 ![Quai Network](https://img.shields.io/badge/Network-Quai-green)
 ![Next.js](https://img.shields.io/badge/Next.js-14-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
 ![EIP-2612](https://img.shields.io/badge/EIP--2612-Permit-orange)
+![Upgradeable](https://img.shields.io/badge/Upgradeable-Proxy-purple)
+![V2 Features](https://img.shields.io/badge/V2-Compliance-green)
 
 ## 🚀 Features
 
@@ -26,23 +28,40 @@ A comprehensive decentralized application (dApp) for interacting with ERC20 toke
 - **Meta-Transactions**: Support for third-party gas payment
 - **Nonce Management**: Automatic nonce tracking for replay attack prevention
 
+### 🔄 Upgradeable Contract System
+- **Transparent Proxy Pattern**: Upgradeable smart contracts with state preservation
+- **Proxy Admin**: Secure upgrade management with owner-only access
+- **Reinitializer Support**: Safe contract upgrades with new initialization data
+- **Version Detection**: Automatic contract version identification
+- **State Preservation**: All existing balances and settings maintained during upgrades
+
+### 🛡️ V2 Compliance Features
+- **Blacklist Management**: Add/remove addresses from blacklist (owner only)
+- **Whitelist Management**: Add/remove addresses from whitelist (owner only)
+- **Whitelist Mode**: Restrict transfers to whitelisted addresses only
+- **Compliance Ready**: Built-in features for regulatory compliance
+- **Batch Operations**: Support for batch blacklist/whitelist operations
+
 ### User Experience
 - **Modern UI**: Clean, responsive design with dark mode support
+- **Tabbed Interface**: Organized functionality with Main, Permit, and Owner tabs
+- **Role-Based Access**: Owner-only features with automatic detection
 - **Real-time Updates**: Live balance and transaction status updates
 - **Error Handling**: Comprehensive error messages and validation
 - **Loading States**: Smooth loading indicators for all operations
 - **Mobile Responsive**: Optimized for all device sizes
-- **Tabbed Interface**: Organized permit functionality with intuitive navigation
+- **Version Awareness**: Visual indicators for V2 feature availability
 
 ## 🛠️ Technology Stack
 
 - **Frontend**: Next.js 14, React 18, TypeScript
 - **Styling**: Tailwind CSS with custom components
 - **Blockchain**: Quai Network, Quais.js SDK
-- **Smart Contracts**: Solidity 0.8.17+, OpenZeppelin contracts (ERC20, ERC20Permit, ERC20Pausable)
+- **Smart Contracts**: Solidity 0.8.22+, OpenZeppelin contracts (ERC20, ERC20Permit, ERC20Pausable, Upgradeable)
+- **Proxy Pattern**: Transparent Upgradeable Proxy with ProxyAdmin
 - **Wallet**: Pelagus wallet integration
 - **Build Tools**: Hardhat (with viaIR compilation), ESLint, PostCSS
-- **Standards**: EIP-2612 (Permit), EIP-712 (Typed Data Signing)
+- **Standards**: EIP-2612 (Permit), EIP-712 (Typed Data Signing), EIP-1967 (Proxy Storage)
 
 ## 📋 Prerequisites
 
@@ -78,35 +97,54 @@ Create a `.env.local` file in the project root:
 # Quai Network Configuration
 NEXT_PUBLIC_RPC_URL=https://orchard.rpc.quai.network
 NEXT_PUBLIC_EXPLORER_URL=https://orchard.quaiscan.io
-CHAIN_ID=0x00
+NEXT_PUBLIC_CHAIN_ID=0x00
+CYPRUS1_PK=your_private_key_here
+CYPRUS1_ADDRESS=your_wallet_address
 
-# Contract Configuration (set after deployment)
-NEXT_PUBLIC_DEPLOYED_CONTRACT=0x0000000000000000000000000000000000000000
-INITIAL_OWNER=0x0000000000000000000000000000000000000000
-
-# Token Configuration (for deployment)
+# Token Configuration
 TOKEN_NAME=TestToken
 TOKEN_SYMBOL=TEST
 TOKEN_INITIAL_SUPPLY=1000000
 TOKEN_MAX_SUPPLY=10000000
+INITIAL_OWNER=your_wallet_address
 
-# Private Key (for deployment only - keep secure!)
-PRIVATE_KEY=your_private_key_here
+# V2 Upgrade Configuration
+V2_TOKEN_MAX_SUPPLY=20000000
+
+# After deployment (auto-populated)
+PROXY_ADMIN_ADDRESS=0x...
+PROXY_ADDRESS=0x...
 ```
 
-### 4. Deploy Smart Contract
+### 4. Deploy Upgradeable Smart Contract System
 
 ```bash
 # Compile contracts
 npx hardhat compile
 
-# Deploy to Quai Network
-npx hardhat run scripts/deployToken.js --network cyprus1
+# Deploy complete upgradeable system
+npm run deploy:proxy
+
+# Or deploy to fullpath network
+npm run deploy:proxy:fullpath
 ```
 
-Copy the deployed contract address to your `.env.local` file.
+The deployment script will output the contract addresses. Copy them to your `.env.local` file.
 
-### 5. Start Development Server
+### 5. Upgrade to V2 (Optional)
+
+```bash
+# Upgrade to V2 with blacklist/whitelist features
+npm run upgrade:token
+
+# Test V2 features
+npm run test:v2
+
+# Verify deployment
+npm run verify:deployment
+```
+
+### 6. Start Development Server
 
 ```bash
 npm run dev
@@ -125,10 +163,31 @@ Open [http://localhost:3000](http://localhost:3000) to view the dApp.
 3. Switch to Quai Network (Cyprus-1)
 4. Click "Connect Wallet" in the dApp
 
+### Tabbed Interface
+
+The dApp features a clean, organized tabbed interface:
+
+#### Main Tab
+- **Token Information**: View token metadata, supply statistics, and version info
+- **Balance Display**: Check and refresh your token balance
+- **Transfer Form**: Send tokens to any address
+- **Feature Overview**: Learn about all available token features
+
+#### Permit Tab
+- **Permit Operations**: Create and execute gasless approvals
+- **Gasless Transfers**: Transfer tokens without separate approval transactions
+- **Signature Management**: Handle EIP-712 permit signatures
+
+#### Owner Tab (Contract Owner Only)
+- **Owner Controls**: Mint, burn, pause/unpause, and supply management
+- **V2 Features**: Blacklist/whitelist management (if upgraded to V2)
+- **Compliance Tools**: Advanced compliance and security features
+
 ### Token Operations
 
 #### Viewing Token Information
 - The dApp automatically displays token metadata, supply statistics, and minting progress
+- Version information shows if V2 features are available
 - Real-time updates show current supply vs. maximum supply
 
 #### Checking Your Balance
@@ -137,10 +196,11 @@ Open [http://localhost:3000](http://localhost:3000) to view the dApp.
 - Balance updates automatically after transactions
 
 #### Transferring Tokens
-1. Enter the recipient's address
-2. Specify the amount to transfer
-3. Click "Transfer Tokens"
-4. Confirm the transaction in your wallet
+1. Navigate to the Main tab
+2. Enter the recipient's address
+3. Specify the amount to transfer
+4. Click "Transfer Tokens"
+5. Confirm the transaction in your wallet
 
 #### Owner Functions (Contract Owner Only)
 - **Mint Tokens**: Create new tokens and send them to any address
@@ -153,7 +213,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the dApp.
 The dApp includes advanced Permit functionality for gasless approvals:
 
 #### Creating and Signing Permits
-1. **Navigate to Permit Panel**: Located below the main token operations
+1. **Navigate to Permit Tab**: Click on the "Permit" tab in the interface
 2. **Enter Spender Address**: The address that will be allowed to spend your tokens
 3. **Specify Amount**: The maximum amount to approve
 4. **Set Deadline**: When the permit expires (Unix timestamp)
@@ -176,6 +236,29 @@ The dApp includes advanced Permit functionality for gasless approvals:
 - **Meta-Transactions**: Third parties can pay gas for permit execution
 - **Batch Operations**: Multiple permits in one transaction
 - **Mobile Friendly**: Better experience on mobile devices
+
+### 🛡️ V2 Compliance Features (Upgrade Required)
+
+The dApp supports advanced compliance features when upgraded to V2:
+
+#### Blacklist Management
+1. **Navigate to Owner Tab**: Only contract owners can access this functionality
+2. **Enter Address**: Input the address to blacklist/unblacklist
+3. **Check Status**: Verify current blacklist status
+4. **Blacklist Address**: Prevent address from sending/receiving tokens
+5. **Remove from Blacklist**: Restore normal functionality
+
+#### Whitelist Management
+1. **Enable Whitelist Mode**: Toggle whitelist mode on/off
+2. **Add to Whitelist**: Allow specific addresses to transfer tokens
+3. **Remove from Whitelist**: Remove transfer permissions
+4. **Status Checking**: Verify whitelist status of any address
+
+#### Compliance Benefits
+- **Regulatory Compliance**: Meet KYC/AML requirements
+- **Security Control**: Block suspicious addresses
+- **Transfer Restrictions**: Control who can use the token
+- **Emergency Response**: Quickly block problematic addresses
 
 ### 🛡️ Contract Pausability
 
@@ -216,31 +299,49 @@ These functions continue to work even when paused:
 ## 🏗️ Project Structure
 
 ```
-quai-token-dapp/
+quai-upgradeable-smartcontract/
 ├── contracts/                 # Smart contracts
-│   └── TestToken.sol         # Enhanced ERC20 token with Permit support
+│   ├── TestToken.sol         # V1: Enhanced ERC20 token with Permit support
+│   ├── TestTokenV2.sol       # V2: Added blacklist/whitelist functionality
+│   ├── TestTokenProxyAdmin.sol    # Proxy admin for upgrade management
+│   └── TestTokenTransparentProxy.sol # Transparent upgradeable proxy
 ├── scripts/                  # Deployment scripts
-│   └── deployToken.js        # Contract deployment
+│   ├── initialProxyDeploy.js # Deploy complete upgradeable system
+│   ├── upgradeToken.js       # Upgrade to V2 with reinitializer
+│   ├── testV2Features.js     # Test V2 functionality
+│   ├── verifyDeployment.js   # Verify deployment state
+│   └── deployToken.js        # Legacy deployment (V1 only)
 ├── src/
 │   ├── app/                  # Next.js app directory
 │   │   ├── layout.tsx        # Root layout
-│   │   ├── page.tsx          # Main dApp page
+│   │   ├── page.tsx          # Main dApp page with tabbed interface
 │   │   ├── providers.tsx     # Context providers
 │   │   ├── store.tsx         # State management
 │   │   └── additional.d.ts   # TypeScript declarations
 │   ├── components/           # React components
+│   │   ├── ui/               # UI components
+│   │   │   └── Tabs.tsx      # Reusable tab component
+│   │   ├── tabs/             # Tab content components
+│   │   │   ├── MainTab.tsx   # Main functionality tab
+│   │   │   ├── PermitTab.tsx # Permit functionality tab
+│   │   │   ├── OwnerTab.tsx  # Owner controls tab
+│   │   │   └── index.ts      # Tab exports
 │   │   ├── token/            # Token-related components
-│   │   │   ├── TokenInfo.tsx      # Token metadata display (with pause status)
+│   │   │   ├── TokenInfo.tsx      # Token metadata display
 │   │   │   ├── BalanceDisplay.tsx # User balance management
 │   │   │   ├── TransferForm.tsx   # Token transfer interface
-│   │   │   ├── OwnerPanel.tsx     # Owner-only functions (with pause controls)
-│   │   │   ├── PermitPanel.tsx    # 🆕 Permit functionality
+│   │   │   ├── OwnerPanel.tsx     # Owner-only functions
+│   │   │   ├── PermitPanel.tsx    # Permit functionality
+│   │   │   ├── BlacklistWhitelistPanel.tsx # V2 compliance features
+│   │   │   ├── VersionInfo.tsx    # Contract version display
 │   │   │   └── index.ts           # Component exports
 │   │   └── wallet/           # Wallet components
 │   │       └── connectButton.tsx  # Enhanced wallet connection
+│   ├── hooks/                # Custom React hooks
+│   │   └── useIsOwner.ts     # Owner detection hook
 │   └── utils/                # Utility functions
-│       ├── tokenUtils.ts     # Token contract interactions (with pause functions)
-│       ├── permitUtils.ts    # 🆕 Permit signature utilities
+│       ├── tokenUtils.ts     # Token contract interactions (V1 & V2)
+│       ├── permitUtils.ts    # Permit signature utilities
 │       ├── quaisUtils.ts     # Quai Network utilities
 │       ├── constants.ts      # Environment constants
 │       └── wallet/           # Wallet utilities
@@ -251,6 +352,7 @@ quai-token-dapp/
 ├── cache/                    # Hardhat cache
 ├── metadata/                 # Contract metadata
 ├── hardhat.config.js         # Hardhat configuration (with viaIR)
+├── DEPLOYMENT_GUIDE.md       # Comprehensive deployment guide
 └── package.json              # Dependencies and scripts
 ```
 
@@ -267,7 +369,16 @@ npm run start        # Start production server
 # Smart Contracts
 npm run compile      # Compile contracts
 npm run test         # Run contract tests
-npm run deploy       # Deploy contracts
+
+# Deployment & Upgrades
+npm run deploy:proxy          # Deploy complete upgradeable system
+npm run deploy:proxy:fullpath # Deploy to fullpath network
+npm run upgrade:token         # Upgrade to V2 with reinitializer
+npm run upgrade:token:fullpath # Upgrade on fullpath network
+npm run test:v2               # Test V2 features
+npm run test:v2:fullpath      # Test V2 on fullpath network
+npm run verify:deployment     # Verify deployment state
+npm run verify:deployment:fullpath # Verify on fullpath network
 
 # Code Quality
 npm run lint         # Run ESLint
@@ -294,8 +405,7 @@ npx hardhat run scripts/deployToken.js --network cyprus1
 
 #### Contract Features
 
-The `TestToken.sol` contract includes:
-
+**TestToken.sol (V1)** includes:
 - **ERC20 Standard**: Full ERC20 token implementation
 - **ERC20Permit Extension**: EIP-2612 permit functionality
 - **ERC20Pausable Extension**: Emergency pause functionality
@@ -308,6 +418,26 @@ The `TestToken.sol` contract includes:
   - `pause()`: Pause all contract operations (owner only)
   - `unpause()`: Resume contract operations (owner only)
   - `paused()`: Check if contract is currently paused
+
+**TestTokenV2.sol** adds:
+- **Blacklist Management**: Block addresses from sending/receiving tokens
+- **Whitelist Management**: Restrict transfers to whitelisted addresses only
+- **Compliance Features**: Built-in regulatory compliance tools
+- **Version Identification**: `version()` function returns "2.0.0"
+- **Reinitializer Support**: `initializeV2()` for safe upgrades
+- **Enhanced Functions**:
+  - `setBlacklisted()`: Add/remove addresses from blacklist
+  - `setWhitelisted()`: Add/remove addresses from whitelist
+  - `setWhitelistEnabled()`: Enable/disable whitelist mode
+  - `isBlacklisted()`: Check blacklist status
+  - `isWhitelisted()`: Check whitelist status
+  - `isWhitelistEnabled()`: Check whitelist mode status
+
+**Proxy System**:
+- **TestTokenTransparentProxy.sol**: Transparent upgradeable proxy
+- **TestTokenProxyAdmin.sol**: Secure upgrade management
+- **State Preservation**: All balances and settings maintained during upgrades
+- **Admin Controls**: Owner-only upgrade permissions
 
 #### Compilation Notes
 
@@ -332,24 +462,35 @@ To add support for additional networks, update the configuration in:
 
 ### Latest Updates
 
-- **Contract Pausability**: Emergency pause/unpause functionality for contract owners
-- **Enhanced Owner Panel**: New contract control section with pause status indicators
-- **Real-time Status Display**: Live pause status in token information panel
-- **Permit Standard Support**: Full EIP-2612 implementation for gasless approvals
-- **Enhanced UI**: New PermitPanel with tabbed interface for better UX
-- **Advanced Contract Features**: Batch permits, gasless transfers, and nonce management
-- **Improved Compilation**: viaIR compilation for handling complex contracts
-- **Better Error Handling**: Comprehensive validation and user feedback
-- **Mobile Optimization**: Enhanced responsive design for all devices
+- **🔄 Upgradeable Contract System**: Complete transparent proxy implementation with state preservation
+- **🛡️ V2 Compliance Features**: Blacklist/whitelist functionality for regulatory compliance
+- **📱 Tabbed Interface**: Clean, organized UI with Main, Permit, and Owner tabs
+- **🔐 Role-Based Access**: Automatic owner detection with conditional feature access
+- **📊 Version Detection**: Real-time contract version identification and V2 feature indicators
+- **⚡ Reinitializer Support**: Safe contract upgrades with new initialization data
+- **🎯 Enhanced Deployment**: Comprehensive deployment scripts for proxy system
+- **🧪 V2 Testing**: Automated testing for all V2 compliance features
+- **📋 Deployment Guide**: Complete documentation for upgradeable contract deployment
+- **🔧 Advanced Owner Controls**: Enhanced owner panel with V2 compliance tools
+- **📱 Mobile Optimization**: Enhanced responsive design for all devices
+- **🛡️ Security Features**: Improved error handling and validation
 
-### Migration from Basic Approve
+### Migration from Basic ERC20
 
 If you're upgrading from a basic ERC20 token:
 
-1. **Deploy New Contract**: The enhanced TestToken includes Permit functionality
-2. **Update Frontend**: New components automatically handle both approve and permit methods
-3. **Backward Compatibility**: Traditional approve/transferFrom still works
-4. **Enhanced Features**: Users can now choose between gasless permits or traditional approvals
+1. **Deploy Upgradeable System**: Use the new proxy deployment scripts
+2. **Upgrade to V2**: Add compliance features with the upgrade script
+3. **Update Frontend**: New tabbed interface with V2 feature detection
+4. **Backward Compatibility**: All existing functionality preserved during upgrades
+5. **Enhanced Features**: Users get V2 compliance features after upgrade
+
+### Upgrade Path
+
+1. **V1 Deployment**: Deploy basic upgradeable token with permit functionality
+2. **V2 Upgrade**: Add blacklist/whitelist compliance features
+3. **Future Upgrades**: Easy upgrades with state preservation
+4. **Feature Detection**: UI automatically detects and shows available features
 
 ## 🤝 Contributing
 
@@ -393,19 +534,23 @@ If you encounter any issues:
 ## 🙏 Acknowledgments
 
 - [Quai Network](https://qua.ai/) for the blockchain infrastructure
-- [OpenZeppelin](https://openzeppelin.com/) for secure smart contract libraries, ERC20Permit, and ERC20Pausable
+- [OpenZeppelin](https://openzeppelin.com/) for secure smart contract libraries, ERC20Permit, ERC20Pausable, and upgradeable contracts
 - [Next.js](https://nextjs.org/) for the React framework
 - [Tailwind CSS](https://tailwindcss.com/) for styling utilities
 - [EIP-2612](https://eips.ethereum.org/EIPS/eip-2612) for the Permit standard specification
 - [EIP-712](https://eips.ethereum.org/EIPS/eip-712) for typed data signing
+- [EIP-1967](https://eips.ethereum.org/EIPS/eip-1967) for proxy storage specification
 - [Hardhat](https://hardhat.org/) for smart contract development tools
 
 ## 📚 Additional Resources
 
 - [EIP-2612 Permit Standard](https://eips.ethereum.org/EIPS/eip-2612)
 - [EIP-712 Typed Data Signing](https://eips.ethereum.org/EIPS/eip-712)
+- [EIP-1967 Proxy Storage](https://eips.ethereum.org/EIPS/eip-1967)
 - [OpenZeppelin ERC20Permit Documentation](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20Permit)
 - [OpenZeppelin ERC20Pausable Documentation](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20Pausable)
+- [OpenZeppelin Upgradeable Contracts](https://docs.openzeppelin.com/contracts/4.x/upgradeable)
+- [OpenZeppelin Proxy Patterns](https://docs.openzeppelin.com/contracts/4.x/proxies)
 - [Quai Network Documentation](https://docs.qu.ai/)
 - [Pelagus Wallet Documentation](https://docs.pelaguswallet.io/)
 
@@ -413,4 +558,4 @@ If you encounter any issues:
 
 **Built with ❤️ for the Quai Network ecosystem**
 
-*Enhanced with modern Web3 standards for the future of decentralized applications*
+*Enhanced with modern Web3 standards, upgradeable contracts, and compliance features for the future of decentralized applications*
