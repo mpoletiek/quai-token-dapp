@@ -3,5 +3,3 @@ export { BalanceDisplay } from './BalanceDisplay';
 export { TransferForm } from './TransferForm';
 export { OwnerPanel } from './OwnerPanel';
 export { PermitPanel } from './PermitPanel';
-export { BlacklistWhitelistPanel } from './BlacklistWhitelistPanel';
-export { VersionInfo } from './VersionInfo';

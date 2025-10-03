@@ -1,24 +1,15 @@
 {
-  "name": "quai-upgradeable-smartcontract",
+  "name": "quai-token-dapp",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "deploy:proxy": "hardhat run scripts/initialProxyDeploy.js --network cyprus1",
-    "deploy:proxy:fullpath": "hardhat run scripts/initialProxyDeploy.js --network cyprus1_fullpath",
-    "upgrade:token": "hardhat run scripts/upgradeToken.js --network cyprus1",
-    "upgrade:token:fullpath": "hardhat run scripts/upgradeToken.js --network cyprus1_fullpath",
-    "test:v2": "hardhat run scripts/testV2Features.js --network cyprus1",
-    "test:v2:fullpath": "hardhat run scripts/testV2Features.js --network cyprus1_fullpath",
-    "verify:deployment": "hardhat run scripts/verifyDeployment.js --network cyprus1",
-    "verify:deployment:fullpath": "hardhat run scripts/verifyDeployment.js --network cyprus1_fullpath"
+    "lint": "eslint"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^5.4.0",
-    "@openzeppelin/contracts-upgradeable": "^5.4.0",
     "@quai/hardhat-deploy-metadata": "^1.0.8",
     "dotenv": "^17.2.2",
     "next": "15.5.4",

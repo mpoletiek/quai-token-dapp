@@ -1,12 +1,12 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/contracts/TestToken.sol": {
-      "lastModificationDate": 1759447894921,
-      "contentHash": "1602c731a92eb47d5d23b8246a7cf975",
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/contracts/TestToken.sol": {
+      "lastModificationDate": 1759275139711,
+      "contentHash": "69032d138b0de6820f5a7373779e3a49",
       "sourceName": "contracts/TestToken.sol",
       "solcConfig": {
-        "version": "0.8.22",
+        "version": "0.8.20",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -35,27 +35,26 @@
         }
       },
       "imports": [
-        "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20PermitUpgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20PausableUpgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol",
-        "@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
-        "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol"
+        "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol",
+        "@openzeppelin/contracts/token/ERC20/extensions/ERC20Pausable.sol",
+        "@openzeppelin/contracts/access/Ownable.sol",
+        "@openzeppelin/contracts/utils/Pausable.sol",
+        "@openzeppelin/contracts/utils/cryptography/ECDSA.sol"
       ],
       "versionPragmas": [
-        "^0.8.22"
+        "^0.8.17"
       ],
       "artifacts": [
         "TestToken"
       ]
     },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol": {
-      "lastModificationDate": 1759447863452,
-      "contentHash": "77d30f3cd93f46b80b6f8f1ebc574ee4",
-      "sourceName": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol",
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
+      "lastModificationDate": 1758672091470,
+      "contentHash": "d3c790edc9ccf808a17c5a6cd13614fd",
+      "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
       "solcConfig": {
-        "version": "0.8.22",
+        "version": "0.8.20",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -84,22 +83,21 @@
         }
       },
       "imports": [
-        "../utils/ContextUpgradeable.sol",
-        "../proxy/utils/Initializable.sol"
+        "../utils/Context.sol"
       ],
       "versionPragmas": [
         "^0.8.20"
       ],
       "artifacts": [
-        "OwnableUpgradeable"
+        "Ownable"
       ]
     },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol": {
-      "lastModificationDate": 1759447863453,
-      "contentHash": "a77dad8312dfaddab72fab403ee0c0a6",
-      "sourceName": "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol",
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
+      "lastModificationDate": 1758672091046,
+      "contentHash": "59dfce11284f2636db261df9b6a18f81",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
       "solcConfig": {
-        "version": "0.8.22",
+        "version": "0.8.20",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -128,22 +126,24 @@
         }
       },
       "imports": [
-        "../utils/ContextUpgradeable.sol",
-        "../proxy/utils/Initializable.sol"
+        "./IERC20.sol",
+        "./extensions/IERC20Metadata.sol",
+        "../../utils/Context.sol",
+        "../../interfaces/draft-IERC6093.sol"
       ],
       "versionPragmas": [
         "^0.8.20"
       ],
       "artifacts": [
-        "PausableUpgradeable"
+        "ERC20"
       ]
     },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol": {
-      "lastModificationDate": 1759447863440,
-      "contentHash": "f5cb0cb4dcb2ad0074b448995119804b",
-      "sourceName": "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol",
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/utils/Pausable.sol": {
+      "lastModificationDate": 1758672091488,
+      "contentHash": "0d47b53e10b1985efbb396f937626279",
+      "sourceName": "@openzeppelin/contracts/utils/Pausable.sol",
       "solcConfig": {
-        "version": "0.8.22",
+        "version": "0.8.20",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -172,25 +172,21 @@
         }
       },
       "imports": [
-        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-        "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
-        "../../utils/ContextUpgradeable.sol",
-        "@openzeppelin/contracts/interfaces/draft-IERC6093.sol",
-        "../../proxy/utils/Initializable.sol"
+        "../utils/Context.sol"
       ],
       "versionPragmas": [
         "^0.8.20"
       ],
       "artifacts": [
-        "ERC20Upgradeable"
+        "Pausable"
       ]
     },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/utils/cryptography/ECDSA.sol": {
-      "lastModificationDate": 1759447042204,
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/utils/cryptography/ECDSA.sol": {
+      "lastModificationDate": 1758672090905,
       "contentHash": "81de029d56aa803972be03c5d277cb6c",
       "sourceName": "@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
       "solcConfig": {
-        "version": "0.8.22",
+        "version": "0.8.20",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -226,12 +222,103 @@
         "ECDSA"
       ]
     },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol": {
-      "lastModificationDate": 1759447863451,
-      "contentHash": "2acae54ad209714bca07edf4bae32f72",
-      "sourceName": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol",
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol": {
+      "lastModificationDate": 1758672091068,
+      "contentHash": "2343c0c3b51267f4f2639ec3f99cd63e",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol",
       "solcConfig": {
-        "version": "0.8.22",
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "viaIR": true,
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "useLiteralContent": true
+          },
+          "evmVersion": "london",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IERC20Permit.sol",
+        "../ERC20.sol",
+        "../../../utils/cryptography/ECDSA.sol",
+        "../../../utils/cryptography/EIP712.sol",
+        "../../../utils/Nonces.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "ERC20Permit"
+      ]
+    },
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/token/ERC20/extensions/ERC20Pausable.sol": {
+      "lastModificationDate": 1758672091067,
+      "contentHash": "a3ce035689a60e32921347c16a3fb786",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/ERC20Pausable.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "viaIR": true,
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "useLiteralContent": true
+          },
+          "evmVersion": "london",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../ERC20.sol",
+        "../../../utils/Pausable.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "ERC20Pausable"
+      ]
+    },
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/utils/Context.sol": {
+      "lastModificationDate": 1758672090699,
+      "contentHash": "67bfbc07588eb8683b3fd8f6f909563e",
+      "sourceName": "@openzeppelin/contracts/utils/Context.sol",
+      "solcConfig": {
+        "version": "0.8.20",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -264,151 +351,15 @@
         "^0.8.20"
       ],
       "artifacts": [
-        "Initializable"
+        "Context"
       ]
     },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20PermitUpgradeable.sol": {
-      "lastModificationDate": 1759447863440,
-      "contentHash": "9e6f7892f3911a565a7747a7f0185883",
-      "sourceName": "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20PermitUpgradeable.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "viaIR": true,
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "useLiteralContent": true
-          },
-          "evmVersion": "london",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC20/extensions/IERC20Permit.sol",
-        "../ERC20Upgradeable.sol",
-        "@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
-        "../../../utils/cryptography/EIP712Upgradeable.sol",
-        "../../../utils/NoncesUpgradeable.sol",
-        "../../../proxy/utils/Initializable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "ERC20PermitUpgradeable"
-      ]
-    },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20PausableUpgradeable.sol": {
-      "lastModificationDate": 1759447863440,
-      "contentHash": "46d770a6194b5c717774c7ce4287ffd1",
-      "sourceName": "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20PausableUpgradeable.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "viaIR": true,
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "useLiteralContent": true
-          },
-          "evmVersion": "london",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../ERC20Upgradeable.sol",
-        "../../../utils/PausableUpgradeable.sol",
-        "../../../proxy/utils/Initializable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "ERC20PausableUpgradeable"
-      ]
-    },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol": {
-      "lastModificationDate": 1759447863432,
-      "contentHash": "c28aaa25d083a9a55bd9ec9e0b785122",
-      "sourceName": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "viaIR": true,
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "useLiteralContent": true
-          },
-          "evmVersion": "london",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../proxy/utils/Initializable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "ContextUpgradeable"
-      ]
-    },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/interfaces/draft-IERC6093.sol": {
-      "lastModificationDate": 1759447042213,
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/interfaces/draft-IERC6093.sol": {
+      "lastModificationDate": 1758672090882,
       "contentHash": "5041977bbe908de2e6ed0270447f79ad",
       "sourceName": "@openzeppelin/contracts/interfaces/draft-IERC6093.sol",
       "solcConfig": {
-        "version": "0.8.22",
+        "version": "0.8.20",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -446,12 +397,12 @@
         "IERC721Errors"
       ]
     },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
-      "lastModificationDate": 1759447042211,
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+      "lastModificationDate": 1758672091366,
       "contentHash": "9261adf6457863de3e9892f51317ec89",
       "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
       "solcConfig": {
-        "version": "0.8.22",
+        "version": "0.8.20",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -487,12 +438,12 @@
         "IERC20"
       ]
     },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
-      "lastModificationDate": 1759447042210,
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
+      "lastModificationDate": 1758672091370,
       "contentHash": "513778b30d2750f5d2b9b19bbcf748a5",
       "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
       "solcConfig": {
-        "version": "0.8.22",
+        "version": "0.8.20",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -530,12 +481,53 @@
         "IERC20Metadata"
       ]
     },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts-upgradeable/utils/NoncesUpgradeable.sol": {
-      "lastModificationDate": 1759447863452,
-      "contentHash": "42abaa30579e947b1f601ff9756eb47c",
-      "sourceName": "@openzeppelin/contracts-upgradeable/utils/NoncesUpgradeable.sol",
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/utils/Nonces.sol": {
+      "lastModificationDate": 1758672091465,
+      "contentHash": "c32d108058718efb9061b88e83a83f79",
+      "sourceName": "@openzeppelin/contracts/utils/Nonces.sol",
       "solcConfig": {
-        "version": "0.8.22",
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "viaIR": true,
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "useLiteralContent": true
+          },
+          "evmVersion": "london",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "Nonces"
+      ]
+    },
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/utils/cryptography/EIP712.sol": {
+      "lastModificationDate": 1758672090909,
+      "contentHash": "d67dfba302ed2489324d7584625c3bde",
+      "sourceName": "@openzeppelin/contracts/utils/cryptography/EIP712.sol",
+      "solcConfig": {
+        "version": "0.8.20",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -564,66 +556,23 @@
         }
       },
       "imports": [
-        "../proxy/utils/Initializable.sol"
+        "./MessageHashUtils.sol",
+        "../ShortStrings.sol",
+        "../../interfaces/IERC5267.sol"
       ],
       "versionPragmas": [
         "^0.8.20"
       ],
       "artifacts": [
-        "NoncesUpgradeable"
+        "EIP712"
       ]
     },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts-upgradeable/utils/cryptography/EIP712Upgradeable.sol": {
-      "lastModificationDate": 1759447863435,
-      "contentHash": "f8055e450e39c5c05fe8765503402e52",
-      "sourceName": "@openzeppelin/contracts-upgradeable/utils/cryptography/EIP712Upgradeable.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "viaIR": true,
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "useLiteralContent": true
-          },
-          "evmVersion": "london",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol",
-        "@openzeppelin/contracts/interfaces/IERC5267.sol",
-        "../../proxy/utils/Initializable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "EIP712Upgradeable"
-      ]
-    },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Permit.sol": {
-      "lastModificationDate": 1759447042210,
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Permit.sol": {
+      "lastModificationDate": 1758672091374,
       "contentHash": "b01905745d47df90c7bd5dd70d498cb7",
       "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Permit.sol",
       "solcConfig": {
-        "version": "0.8.22",
+        "version": "0.8.20",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -659,12 +608,96 @@
         "IERC20Permit"
       ]
     },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol": {
-      "lastModificationDate": 1759447042205,
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/interfaces/IERC5267.sol": {
+      "lastModificationDate": 1758672091393,
+      "contentHash": "6e00d2fe4bc0d5f1add753824498bb35",
+      "sourceName": "@openzeppelin/contracts/interfaces/IERC5267.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "viaIR": true,
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "useLiteralContent": true
+          },
+          "evmVersion": "london",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.4.16"
+      ],
+      "artifacts": [
+        "IERC5267"
+      ]
+    },
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/utils/ShortStrings.sol": {
+      "lastModificationDate": 1758672091520,
+      "contentHash": "c1be9487e5a64acf23b5d8028482e748",
+      "sourceName": "@openzeppelin/contracts/utils/ShortStrings.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "viaIR": true,
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "useLiteralContent": true
+          },
+          "evmVersion": "london",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./StorageSlot.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "ShortStrings"
+      ]
+    },
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol": {
+      "lastModificationDate": 1758672091456,
       "contentHash": "260f3968eefa3bbd30520cff5384cd93",
       "sourceName": "@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol",
       "solcConfig": {
-        "version": "0.8.22",
+        "version": "0.8.20",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -702,12 +735,12 @@
         "MessageHashUtils"
       ]
     },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/interfaces/IERC5267.sol": {
-      "lastModificationDate": 1759447042214,
-      "contentHash": "6e00d2fe4bc0d5f1add753824498bb35",
-      "sourceName": "@openzeppelin/contracts/interfaces/IERC5267.sol",
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/utils/StorageSlot.sol": {
+      "lastModificationDate": 1758672091536,
+      "contentHash": "e656d64c4ce918f3d13030b91c935134",
+      "sourceName": "@openzeppelin/contracts/utils/StorageSlot.sol",
       "solcConfig": {
-        "version": "0.8.22",
+        "version": "0.8.20",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -737,18 +770,18 @@
       },
       "imports": [],
       "versionPragmas": [
-        ">=0.4.16"
+        "^0.8.20"
       ],
       "artifacts": [
-        "IERC5267"
+        "StorageSlot"
       ]
     },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
-      "lastModificationDate": 1759447042207,
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
+      "lastModificationDate": 1758672091539,
       "contentHash": "d8f70caf0e0c77dc908176ed44812fb7",
       "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
       "solcConfig": {
-        "version": "0.8.22",
+        "version": "0.8.20",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -788,12 +821,53 @@
         "Strings"
       ]
     },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/utils/math/Math.sol": {
-      "lastModificationDate": 1759447042206,
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/utils/math/SafeCast.sol": {
+      "lastModificationDate": 1758672091510,
+      "contentHash": "2adca1150f58fc6f3d1f0a0f22ee7cca",
+      "sourceName": "@openzeppelin/contracts/utils/math/SafeCast.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 1000
+          },
+          "viaIR": true,
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "useLiteralContent": true
+          },
+          "evmVersion": "london",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "SafeCast"
+      ]
+    },
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/utils/math/Math.sol": {
+      "lastModificationDate": 1758672091448,
       "contentHash": "5ec781e33d3a9ac91ffdc83d94420412",
       "sourceName": "@openzeppelin/contracts/utils/math/Math.sol",
       "solcConfig": {
-        "version": "0.8.22",
+        "version": "0.8.20",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -832,53 +906,12 @@
         "Math"
       ]
     },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/utils/math/SafeCast.sol": {
-      "lastModificationDate": 1759447042206,
-      "contentHash": "2adca1150f58fc6f3d1f0a0f22ee7cca",
-      "sourceName": "@openzeppelin/contracts/utils/math/SafeCast.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "viaIR": true,
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "useLiteralContent": true
-          },
-          "evmVersion": "london",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "SafeCast"
-      ]
-    },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/utils/math/SignedMath.sol": {
-      "lastModificationDate": 1759447042206,
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/utils/math/SignedMath.sol": {
+      "lastModificationDate": 1758672091524,
       "contentHash": "ae3528afb8bdb0a7dcfba5b115ee8074",
       "sourceName": "@openzeppelin/contracts/utils/math/SignedMath.sol",
       "solcConfig": {
-        "version": "0.8.22",
+        "version": "0.8.20",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -916,12 +949,12 @@
         "SignedMath"
       ]
     },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/utils/Panic.sol": {
-      "lastModificationDate": 1759447042206,
+    "/home/mpoletiek/Devspace/SANDBOX/quai-token-dapp/node_modules/@openzeppelin/contracts/utils/Panic.sol": {
+      "lastModificationDate": 1758672091486,
       "contentHash": "2133dc13536b4a6a98131e431fac59e1",
       "sourceName": "@openzeppelin/contracts/utils/Panic.sol",
       "solcConfig": {
-        "version": "0.8.22",
+        "version": "0.8.20",
         "settings": {
           "optimizer": {
             "enabled": true,
@@ -955,659 +988,6 @@
       ],
       "artifacts": [
         "Panic"
-      ]
-    },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/contracts/TestTokenV2.sol": {
-      "lastModificationDate": 1759449324010,
-      "contentHash": "d95007392828b291c7e579c4d854ec08",
-      "sourceName": "contracts/TestTokenV2.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "viaIR": true,
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "useLiteralContent": true
-          },
-          "evmVersion": "london",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20PermitUpgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20PausableUpgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol",
-        "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol",
-        "@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
-        "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.22"
-      ],
-      "artifacts": [
-        "TestTokenV2"
-      ]
-    },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/contracts/TestTokenProxyAdmin.sol": {
-      "lastModificationDate": 1759447524878,
-      "contentHash": "8a024a655371327a78ff766a7c7613fc",
-      "sourceName": "contracts/TestTokenProxyAdmin.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "viaIR": true,
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "useLiteralContent": true
-          },
-          "evmVersion": "london",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol",
-        "@openzeppelin/contracts/access/Ownable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.22"
-      ],
-      "artifacts": [
-        "TestTokenProxyAdmin"
-      ]
-    },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
-      "lastModificationDate": 1759447042208,
-      "contentHash": "d3c790edc9ccf808a17c5a6cd13614fd",
-      "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "viaIR": true,
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "useLiteralContent": true
-          },
-          "evmVersion": "london",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../utils/Context.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "Ownable"
-      ]
-    },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol": {
-      "lastModificationDate": 1759447042209,
-      "contentHash": "781aa52baa21c120b309c25179e2b3f8",
-      "sourceName": "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "viaIR": true,
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "useLiteralContent": true
-          },
-          "evmVersion": "london",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../ERC1967/ERC1967Utils.sol",
-        "../ERC1967/ERC1967Proxy.sol",
-        "../../interfaces/IERC1967.sol",
-        "./ProxyAdmin.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.22"
-      ],
-      "artifacts": [
-        "ITransparentUpgradeableProxy",
-        "TransparentUpgradeableProxy"
-      ]
-    },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/utils/Context.sol": {
-      "lastModificationDate": 1759447042206,
-      "contentHash": "67bfbc07588eb8683b3fd8f6f909563e",
-      "sourceName": "@openzeppelin/contracts/utils/Context.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "viaIR": true,
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "useLiteralContent": true
-          },
-          "evmVersion": "london",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "Context"
-      ]
-    },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/proxy/ERC1967/ERC1967Utils.sol": {
-      "lastModificationDate": 1759447042209,
-      "contentHash": "2741625b983eb412cfdd8aa55a7671c1",
-      "sourceName": "@openzeppelin/contracts/proxy/ERC1967/ERC1967Utils.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "viaIR": true,
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "useLiteralContent": true
-          },
-          "evmVersion": "london",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../beacon/IBeacon.sol",
-        "../../interfaces/IERC1967.sol",
-        "../../utils/Address.sol",
-        "../../utils/StorageSlot.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.21"
-      ],
-      "artifacts": [
-        "ERC1967Utils"
-      ]
-    },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol": {
-      "lastModificationDate": 1759447042209,
-      "contentHash": "07e13052976ae13746455b10ebf3cff9",
-      "sourceName": "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "viaIR": true,
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "useLiteralContent": true
-          },
-          "evmVersion": "london",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../Proxy.sol",
-        "./ERC1967Utils.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.22"
-      ],
-      "artifacts": [
-        "ERC1967Proxy"
-      ]
-    },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/interfaces/IERC1967.sol": {
-      "lastModificationDate": 1759447042214,
-      "contentHash": "3c9577899f440b0c66e880c96e9250bb",
-      "sourceName": "@openzeppelin/contracts/interfaces/IERC1967.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "viaIR": true,
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "useLiteralContent": true
-          },
-          "evmVersion": "london",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.4.11"
-      ],
-      "artifacts": [
-        "IERC1967"
-      ]
-    },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol": {
-      "lastModificationDate": 1759447042209,
-      "contentHash": "b78862027dd9534aa67e36e8519977b8",
-      "sourceName": "@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "viaIR": true,
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "useLiteralContent": true
-          },
-          "evmVersion": "london",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./TransparentUpgradeableProxy.sol",
-        "../../access/Ownable.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.22"
-      ],
-      "artifacts": [
-        "ProxyAdmin"
-      ]
-    },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/utils/Address.sol": {
-      "lastModificationDate": 1759447042205,
-      "contentHash": "2a06d82f31f75087bf90231599da4f1c",
-      "sourceName": "@openzeppelin/contracts/utils/Address.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "viaIR": true,
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "useLiteralContent": true
-          },
-          "evmVersion": "london",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./Errors.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "Address"
-      ]
-    },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/utils/StorageSlot.sol": {
-      "lastModificationDate": 1759447042207,
-      "contentHash": "e656d64c4ce918f3d13030b91c935134",
-      "sourceName": "@openzeppelin/contracts/utils/StorageSlot.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "viaIR": true,
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "useLiteralContent": true
-          },
-          "evmVersion": "london",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "StorageSlot"
-      ]
-    },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/proxy/beacon/IBeacon.sol": {
-      "lastModificationDate": 1759447042209,
-      "contentHash": "ee2e46607ed2be58bd554306d068acba",
-      "sourceName": "@openzeppelin/contracts/proxy/beacon/IBeacon.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "viaIR": true,
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "useLiteralContent": true
-          },
-          "evmVersion": "london",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.4.16"
-      ],
-      "artifacts": [
-        "IBeacon"
-      ]
-    },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/utils/Errors.sol": {
-      "lastModificationDate": 1759447042206,
-      "contentHash": "6b5eac2b85500c3012977849cfd633d8",
-      "sourceName": "@openzeppelin/contracts/utils/Errors.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "viaIR": true,
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "useLiteralContent": true
-          },
-          "evmVersion": "london",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "Errors"
-      ]
-    },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/node_modules/@openzeppelin/contracts/proxy/Proxy.sol": {
-      "lastModificationDate": 1759447042209,
-      "contentHash": "35308c2fa7be99a959494c37e8257c16",
-      "sourceName": "@openzeppelin/contracts/proxy/Proxy.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "viaIR": true,
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "useLiteralContent": true
-          },
-          "evmVersion": "london",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "Proxy"
-      ]
-    },
-    "/home/mpoletiek/Devspace/SANDBOX/quai-upgradeable-smartcontract/contracts/TestTokenTransparentProxy.sol": {
-      "lastModificationDate": 1759447638685,
-      "contentHash": "864e58ee79508d65c129df1e6d22095d",
-      "sourceName": "contracts/TestTokenTransparentProxy.sol",
-      "solcConfig": {
-        "version": "0.8.22",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 1000
-          },
-          "viaIR": true,
-          "metadata": {
-            "bytecodeHash": "ipfs",
-            "useLiteralContent": true
-          },
-          "evmVersion": "london",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/proxy/ERC1967/ERC1967Utils.sol",
-        "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol",
-        "@openzeppelin/contracts/interfaces/IERC1967.sol",
-        "@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.22"
-      ],
-      "artifacts": [
-        "ITransparentUpgradeableProxy",
-        "TestTokenTransparentProxy"
       ]
     }
   }
