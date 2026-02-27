@@ -6,14 +6,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "compile": "npx hardhat compile",
+    "deploy": "npx hardhat run scripts/deployToken.js --network cyprus1",
+    "clean": "npx hardhat clean"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^5.4.0",
     "@quai/hardhat-deploy-metadata": "^1.0.8",
     "dotenv": "^17.2.2",
     "next": "15.5.4",
-    "quais": "^1.0.0-alpha.52",
+    "quais": "^1.0.0-alpha.53",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },

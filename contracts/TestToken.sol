@@ -9,65 +9,36 @@ import "@openzeppelin/contracts/utils/Pausable.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
 contract TestToken is ERC20, ERC20Permit, ERC20Pausable, Ownable {
-    
-    // Maximum supply cap (0 means no limit)
-    uint256 public maxSupply;
-    // Mapping to track total minted amount
-    uint256 public totalMinted;
-    
+
     constructor(
         string memory name,
         string memory symbol,
-        uint256 initialSupply,
-        uint256 _maxSupply
+        uint256 initialSupply
     ) ERC20(name, symbol) ERC20Permit(name) Ownable(msg.sender) {
-        require(initialSupply <= _maxSupply || _maxSupply == 0, "Initial supply exceeds max supply");
-        
-        maxSupply = _maxSupply;
-        totalMinted = initialSupply;
-        
         _mint(msg.sender, initialSupply);
     }
-    
+
     /**
-     * @dev Mint tokens to a specific address (owner only)
+     * @dev Mint tokens to a specific address (anyone can call)
      * @param to Address to mint tokens to
      * @param amount Amount of tokens to mint
      */
-    function mint(address to, uint256 amount) external onlyOwner whenNotPaused {
+    function mint(address to, uint256 amount) external whenNotPaused {
         require(to != address(0), "Cannot mint to zero address");
         require(amount > 0, "Amount must be greater than zero");
-        
-        if (maxSupply > 0) {
-            require(totalSupply() + amount <= maxSupply, "Minting would exceed max supply");
-        }
-        
-        totalMinted += amount;
-        _mint(to, amount);        
-        
+
+        _mint(to, amount);
     }
-    
-    
+
     /**
-     * @dev Burn tokens from caller's balance
+     * @dev Burn tokens from caller's balance (owner only)
      * @param amount Amount of tokens to burn
      */
     function burn(uint256 amount) external onlyOwner whenNotPaused {
         require(amount > 0, "Amount must be greater than zero");
         require(balanceOf(msg.sender) >= amount, "Insufficient balance to burn");
-        
+
         _burn(msg.sender, amount);
-    }
-    
-    
-    /**
-     * @dev Update the maximum supply (owner only)
-     * @param newMaxSupply New maximum supply (0 means no limit)
-     */
-    function updateMaxSupply(uint256 newMaxSupply) external onlyOwner {
-        require(newMaxSupply == 0 || newMaxSupply >= totalSupply(), "New max supply must be >= current supply");
-        
-        maxSupply = newMaxSupply;        
     }
     
     // ============ PAUSABLE FUNCTIONALITY ============

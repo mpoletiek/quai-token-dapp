@@ -13,8 +13,6 @@ export interface TokenInfo {
   symbol: string;
   decimals: number;
   totalSupply: string;
-  maxSupply: string;
-  totalMinted: string;
 }
 
 export interface TokenBalance {
@@ -26,14 +24,12 @@ export interface TokenBalance {
 export const getTokenInfo = async (provider: any): Promise<TokenInfo> => {
   try {
     const contract = new quais.Contract(DEPLOYED_CONTRACT, TOKEN_ABI, provider);
-    
-    const [name, symbol, decimals, totalSupply, maxSupply, totalMinted] = await Promise.all([
+
+    const [name, symbol, decimals, totalSupply] = await Promise.all([
       contract.name(),
       contract.symbol(),
       contract.decimals(),
       contract.totalSupply(),
-      contract.maxSupply(),
-      contract.totalMinted()
     ]);
 
     return {
@@ -41,8 +37,6 @@ export const getTokenInfo = async (provider: any): Promise<TokenInfo> => {
       symbol,
       decimals: Number(decimals),
       totalSupply: totalSupply.toString(),
-      maxSupply: maxSupply.toString(),
-      totalMinted: totalMinted.toString()
     };
   } catch (error) {
     console.error('Error fetching token info:', error);
@@ -86,7 +80,7 @@ export const transferTokens = async (
   }
 };
 
-// Mint tokens (owner only)
+// Mint tokens (anyone can call)
 export const mintTokens = async (
   signer: any,
   to: string,
@@ -119,23 +113,6 @@ export const burnTokens = async (
     return await tx.wait();
   } catch (error) {
     console.error('Error burning tokens:', error);
-    throw error;
-  }
-};
-
-// Update max supply (owner only)
-export const updateMaxSupply = async (
-  signer: any,
-  newMaxSupply: string
-): Promise<any> => {
-  try {
-    const contract = new quais.Contract(DEPLOYED_CONTRACT, TOKEN_ABI, signer);
-    const newMaxSupplyWei = quais.parseUnits(newMaxSupply, 18); // Assuming 18 decimals for max supply
-    
-    const tx = await contract.updateMaxSupply(newMaxSupplyWei);
-    return await tx.wait();
-  } catch (error) {
-    console.error('Error updating max supply:', error);
     throw error;
   }
 };

@@ -152,7 +152,7 @@ export const BalanceDisplay = () => {
               <span className="font-semibold">No tokens yet</span>
             </div>
             <p className="text-sm text-yellow-600 dark:text-yellow-400 mt-1">
-              Your balance is empty. Ask the owner to mint you some tokens!
+              Your balance is empty. Use the Mint form to mint some tokens!
             </p>
           </div>
         )}

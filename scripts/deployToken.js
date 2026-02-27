@@ -4,7 +4,7 @@ const { deployMetadata } = require("hardhat");
 require('dotenv').config()
 
 // Pull contract arguments from .env
-const tokenArgs = [process.env.TOKEN_NAME, process.env.TOKEN_SYMBOL, quais.parseUnits(process.env.TOKEN_INITIAL_SUPPLY), quais.parseUnits(process.env.TOKEN_MAX_SUPPLY)]
+const tokenArgs = [process.env.TOKEN_NAME, process.env.TOKEN_SYMBOL, quais.parseUnits(process.env.TOKEN_INITIAL_SUPPLY)]
 
 async function deployERC20() {
   // Config provider, wallet, and contract factory

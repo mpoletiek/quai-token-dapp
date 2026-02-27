@@ -3,12 +3,13 @@ import { useContext } from "react";
 import { StateContext } from "@/app/store";
 import { useGetAccounts } from "@/utils/wallet";
 import { ConnectButton } from "@/components/wallet/connectButton";
-import { 
-  TokenInfoComponent, 
-  BalanceDisplay, 
-  TransferForm, 
+import {
+  TokenInfoComponent,
+  BalanceDisplay,
+  TransferForm,
+  MintForm,
   OwnerPanel,
-  PermitPanel 
+  PermitPanel
 } from "@/components/token";
 
 export default function Home() {
@@ -68,9 +69,12 @@ export default function Home() {
 
           {/* Right Column */}
           <div className="space-y-8">
+            {/* Mint Form */}
+            <MintForm />
+
             {/* Transfer Form */}
             <TransferForm />
-            
+
             {/* Owner Panel */}
             <OwnerPanel />
           </div>
@@ -108,10 +112,10 @@ export default function Home() {
                 </svg>
               </div>
               <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                Mint & Burn
+                Open Minting
               </h4>
               <p className="text-gray-600 dark:text-gray-300">
-                Contract owner can mint new tokens or burn existing ones
+                Anyone can mint tokens with no supply cap
               </p>
             </div>
 
@@ -122,10 +126,10 @@ export default function Home() {
                 </svg>
               </div>
               <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                Supply Management
+                Owner Controls
               </h4>
               <p className="text-gray-600 dark:text-gray-300">
-                Track total supply, max supply, and minting progress
+                Burn tokens and pause/unpause contract operations
               </p>
             </div>
 

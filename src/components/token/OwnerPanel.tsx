@@ -2,13 +2,10 @@
 
 import { useContext, useEffect, useState } from 'react';
 import { StateContext } from '@/app/store';
-import { 
-  mintTokens, 
-  burnTokens, 
-  updateMaxSupply, 
-  isContractOwner, 
-  getTokenInfo, 
-  isValidAddress, 
+import {
+  burnTokens,
+  isContractOwner,
+  getTokenInfo,
   isValidAmount,
   isContractPaused,
   pauseContract,
@@ -23,24 +20,11 @@ export const OwnerPanel = () => {
   const [tokenSymbol, setTokenSymbol] = useState('');
   const [isPaused, setIsPaused] = useState(false);
   
-  // Mint form state
-  const [mintRecipient, setMintRecipient] = useState('');
-  const [mintAmount, setMintAmount] = useState('');
-  const [mintLoading, setMintLoading] = useState(false);
-  const [mintError, setMintError] = useState<string | null>(null);
-  const [mintSuccess, setMintSuccess] = useState<string | null>(null);
-  
   // Burn form state
   const [burnAmount, setBurnAmount] = useState('');
   const [burnLoading, setBurnLoading] = useState(false);
   const [burnError, setBurnError] = useState<string | null>(null);
   const [burnSuccess, setBurnSuccess] = useState<string | null>(null);
-  
-  // Max supply form state
-  const [newMaxSupply, setNewMaxSupply] = useState('');
-  const [maxSupplyLoading, setMaxSupplyLoading] = useState(false);
-  const [maxSupplyError, setMaxSupplyError] = useState<string | null>(null);
-  const [maxSupplySuccess, setMaxSupplySuccess] = useState<string | null>(null);
   
   // Pause/unpause state
   const [pauseLoading, setPauseLoading] = useState(false);
@@ -75,42 +59,6 @@ export const OwnerPanel = () => {
     checkOwnership();
   }, [web3Provider, account]);
 
-  const handleMint = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!web3Provider || !account) {
-      setMintError('Please connect your wallet first');
-      return;
-    }
-
-    if (!isValidAddress(mintRecipient)) {
-      setMintError('Please enter a valid recipient address');
-      return;
-    }
-
-    if (!isValidAmount(mintAmount)) {
-      setMintError('Please enter a valid amount');
-      return;
-    }
-
-    try {
-      setMintLoading(true);
-      setMintError(null);
-      setMintSuccess(null);
-
-      const tx = await mintTokens(await web3Provider.getSigner(), mintRecipient, mintAmount);
-      
-      setMintSuccess(`Mint successful! Transaction hash: ${shortenAddress(tx.hash)}`);
-      setMintRecipient('');
-      setMintAmount('');
-    } catch (err: any) {
-      console.error('Mint failed:', err);
-      setMintError(err.message || 'Mint failed. Please try again.');
-    } finally {
-      setMintLoading(false);
-    }
-  };
-
   const handleBurn = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -138,36 +86,6 @@ export const OwnerPanel = () => {
       setBurnError(err.message || 'Burn failed. Please try again.');
     } finally {
       setBurnLoading(false);
-    }
-  };
-
-  const handleUpdateMaxSupply = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!web3Provider || !account) {
-      setMaxSupplyError('Please connect your wallet first');
-      return;
-    }
-
-    if (!isValidAmount(newMaxSupply)) {
-      setMaxSupplyError('Please enter a valid amount');
-      return;
-    }
-
-    try {
-      setMaxSupplyLoading(true);
-      setMaxSupplyError(null);
-      setMaxSupplySuccess(null);
-
-      const tx = await updateMaxSupply(await web3Provider.getSigner(), newMaxSupply);
-      
-      setMaxSupplySuccess(`Max supply updated! Transaction hash: ${shortenAddress(tx.hash)}`);
-      setNewMaxSupply('');
-    } catch (err: any) {
-      console.error('Update max supply failed:', err);
-      setMaxSupplyError(err.message || 'Update failed. Please try again.');
-    } finally {
-      setMaxSupplyLoading(false);
     }
   };
 
@@ -277,64 +195,6 @@ export const OwnerPanel = () => {
       </div>
 
       <div className="space-y-8">
-        {/* Mint Tokens */}
-        <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-            <span className="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-3">
-              <span className="text-green-600 dark:text-green-400 text-sm">+</span>
-            </span>
-            Mint Tokens
-          </h3>
-          
-          <form onSubmit={handleMint} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Recipient Address
-              </label>
-              <input
-                type="text"
-                value={mintRecipient}
-                onChange={(e) => setMintRecipient(e.target.value)}
-                placeholder="0x..."
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
-                disabled={mintLoading}
-              />
-            </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Amount ({tokenSymbol})
-              </label>
-              <input
-                type="number"
-                value={mintAmount}
-                onChange={(e) => setMintAmount(e.target.value)}
-                placeholder="0.0"
-                step="0.000001"
-                min="0"
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
-                disabled={mintLoading}
-              />
-            </div>
-            
-            {mintError && (
-              <div className="text-red-500 text-sm">{mintError}</div>
-            )}
-            
-            {mintSuccess && (
-              <div className="text-green-500 text-sm">{mintSuccess}</div>
-            )}
-            
-            <button
-              type="submit"
-              disabled={mintLoading || !mintRecipient || !mintAmount}
-              className="w-full bg-green-500 hover:bg-green-600 disabled:bg-gray-400 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
-            >
-              {mintLoading ? 'Minting...' : 'Mint Tokens'}
-            </button>
-          </form>
-        </div>
-
         {/* Burn Tokens */}
         <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
@@ -375,53 +235,6 @@ export const OwnerPanel = () => {
               className="w-full bg-red-500 hover:bg-red-600 disabled:bg-gray-400 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
             >
               {burnLoading ? 'Burning...' : 'Burn Tokens'}
-            </button>
-          </form>
-        </div>
-
-        {/* Update Max Supply */}
-        <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-            <span className="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-3">
-              <span className="text-blue-600 dark:text-blue-400 text-sm">⚙️</span>
-            </span>
-            Update Max Supply
-          </h3>
-          
-          <form onSubmit={handleUpdateMaxSupply} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                New Max Supply ({tokenSymbol})
-              </label>
-              <input
-                type="number"
-                value={newMaxSupply}
-                onChange={(e) => setNewMaxSupply(e.target.value)}
-                placeholder="0.0"
-                step="0.000001"
-                min="0"
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
-                disabled={maxSupplyLoading}
-              />
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                Set to 0 for unlimited supply
-              </p>
-            </div>
-            
-            {maxSupplyError && (
-              <div className="text-red-500 text-sm">{maxSupplyError}</div>
-            )}
-            
-            {maxSupplySuccess && (
-              <div className="text-green-500 text-sm">{maxSupplySuccess}</div>
-            )}
-            
-            <button
-              type="submit"
-              disabled={maxSupplyLoading || !newMaxSupply}
-              className="w-full bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
-            >
-              {maxSupplyLoading ? 'Updating...' : 'Update Max Supply'}
             </button>
           </form>
         </div>
