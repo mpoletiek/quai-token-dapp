@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { quais } from 'quais';
 import { DEPLOYED_CONTRACT } from './constants';

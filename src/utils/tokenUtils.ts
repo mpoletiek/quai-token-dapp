@@ -168,7 +168,7 @@ export const unpauseContract = async (signer: any): Promise<any> => {
 export const formatTokenAmount = (amount: string, decimals: number): string => {
   try {
     return quais.formatUnits(amount, decimals);
-  } catch (error) {
+  } catch {
     return '0';
   }
 };

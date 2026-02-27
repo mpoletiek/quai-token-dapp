@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import { useContext, useState, useEffect } from 'react';
 import { StateContext } from '@/app/store';
-import { 
-  createPermitData, 
-  signPermit, 
-  executePermit, 
+import {
+  createPermitData,
+  signPermit,
+  executePermit,
   executePermitTransfer,
   validatePermit,
   getNonce,
